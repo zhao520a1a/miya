@@ -1,0 +1,83 @@
+
+spring.application.name: miya-content-service
+
+server:
+  port: 8821
+
+#向服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://120.78.222.191:8888/eureka/
+
+
+spring.datasource:
+  continue-on-error: false
+  initialize: false
+  jmx-enabled: false
+  max-active: 100
+  max-idle: 8
+  min-idle: 8
+  name: dataSource
+  test-while-idle: true
+  time-between-eviction-runs-millis: 1
+  validation-query: 'SELECT 1'
+  type: 'com.zaxxer.hikari.HikariDataSource'
+  driver-class-name: 'com.mysql.jdbc.Driver'
+  url: 'jdbc:mysql://120.78.222.191:3306/miyadb?useUnicode=true&characterEncoding=utf-8&useSSL=true'
+  username: root
+  password: root
+
+
+#图片服务的url
+IMAGE_SERVER_URL: http://120.78.222.191
+
+#FTP相关配置
+#FTP的ip地址
+FTP_ADDRESS: 120.78.222.191
+FTP_PORT: 21
+FTP_USERNAME: ftpuser
+FTP_PASSWORD: ftpuser
+FTP_BASE_PATH: /home/ftpuser/www/images
+#图片服务器的相关配置
+#图片服务器的基础url
+IMAGE_BASE_URL: http://120.78.222.191/images
+
+##服务层基础url
+REST_BASE_URL: http://120.78.222.191:8080/rest
+REST_CONTENT_SYNC_URL: /cache/sync/content/
+
+
+#redis中缓存首页内容的key
+INDEX_CONTENT: INDEX_CONTENT
+
+# Redis数据库索引（默认为0）
+spring.redis:
+  database: 0
+  host: 120.78.222.191
+  port: 6379
+  password:
+  pool.max-active: 8
+  pool.max-wait: -1
+  pool.max-idle: 8
+  pool.min-idle: 0
+  timeout: 0
+
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
+
+
+
+
+
