@@ -1,0 +1,74 @@
+
+spring.application.name: miya-manager-service
+
+server:
+  port: 8001
+  tomcat:
+    uri-encoding: UTF-8
+
+#向服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://120.78.222.191:8888/eureka/
+
+
+spring.datasource:
+  continue-on-error: false # Do not stop if an error occurs while initializing the database.
+  initialize: false # Populate the database using 'data.sql'.
+  jmx-enabled: false # Enable JMX support (if provided by the underlying pool).
+  max-active: 100
+  max-idle: 8
+  min-idle: 8
+  name: dataSource # Name of the datasource.
+  #test-on-borrow:  # For instance `false`
+  #test-on-return:  # For instance `false`
+  test-while-idle: true
+  time-between-eviction-runs-millis: 1
+  validation-query: 'SELECT 1'
+  type: 'com.zaxxer.hikari.HikariDataSource'
+  driver-class-name: 'com.mysql.jdbc.Driver'
+  url: 'jdbc:mysql://120.78.222.191:3306/miyadb?useUnicode=true&characterEncoding=utf-8&useSSL=true'
+  username: root
+  password: root
+
+#图片服务的url
+IMAGE_SERVER_URL: http://120.78.222.191/
+
+
+#如果上传的文件大于 1M 时，上传会报错文件太大的错误，在 application.properties 中设置上传文件的参数即可
+spring.http.multipart.maxFileSize: 100Mb
+spring.http.multipart.maxRequestSize: 100Mb
+
+#FTP相关配置
+#FTP的ip地址
+FTP_ADDRESS: 120.78.222.191
+FTP_PORT: 21
+FTP_USERNAME: ftpuser
+FTP_PASSWORD: ftpuser
+FTP_BASE_PATH: /home/ftpuser/www/images
+#图片服务器的相关配置
+#图片服务器的基础url
+IMAGE_BASE_URL: http://120.78.222.191/images
+#
+##服务层基础url
+REST_BASE_URL: http://120.78.222.191:8080/rest
+REST_CONTENT_SYNC_URL: /cache/sync/content/
+
+
+---
+spring:
+  profiles: env_production
+
+---
+spring:
+  profiles: env_development
+
+
+
+
+
+
+
+
+

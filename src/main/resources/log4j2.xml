@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Properties>
+		<Property name="logPath">../logs/miya-manage</Property>
+		<Property name="filename">miya-manage</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console">
+			<MarkerFilter marker="TRACE" onMatch="DENY" onMismatch="ACCEPT" />
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %logger{36} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="RollingFile" filename="${logPath}/${filename}.log"
+			filepattern="${logPath}/${filename}-%d{yyyyMMdd}.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="info" includeLocation="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+		<!--<Logger name="com.yirendai.jfsk.rsc.dao2.NdbDao" level="TRACE" additivity="false">-->
+			<!--<AppenderRef ref="Console"/>-->
+		<!--</Logger>-->
+	</Loggers>
+</Configuration>
