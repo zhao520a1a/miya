@@ -1,0 +1,31 @@
+利用require.ensure()实现按需加载
+require.ensure([]
+               , function(){
+                    var $=require('jquery')  console.log($("body")); require("./c");
+                }
+                ,"oth");
+
+arg1-标明依赖的模块  arg2-回调函数:require的文件会被单独打包成一个chunk  arg3-配置chunkFilename
+注意：还需要在配置文件中配置output:{chunkFilename,和publicPath}，自定义的chunkName才能生效；否则，webpack会自动配置的名字;
+
+
+
+在build/dev-server.js设置代理服务器ip和port
+在config/index.js设置服务器port和代理路径；
+在src/api/getData.js设置请求url
+在src/config/env.js设置
+
+请求：
+    import {adminList, adminCount} from '@/api/getData'   --定义
+     const res = await adminList({offset: this.offset, limit: this.limit});   --调用
+
+
+页面跳转逻辑：
+在src/router/index.js
+
+
+
+管理员登陆：
+login.vue  -- > 判断是否已经登陆过,登陆操作
+head.vue    --> 获取管理员详细信息
+adminSet.vue  --> 获取管理员详细信息
