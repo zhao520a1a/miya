@@ -1,0 +1,42 @@
+spring.application.name: miya-cart-web
+
+server:
+  port: 8088
+
+#向服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://www.miya.com:8888/eureka
+
+#请求处理的超时时间
+ribbon.ReadTimeout: 120000
+#请求连接的超时时间
+ribbon.ConnectTimeout: 30000
+
+
+
+spring:
+    mvc:
+      view:
+        prefix: /WEB-INF/jsp/
+        suffix: .jsp
+
+#feign.hystrix.enabled: false
+
+
+CART_KEY: MIYA_CART
+CART_EXPIER: 604800  #一天
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
