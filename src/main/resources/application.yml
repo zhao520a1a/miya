@@ -1,0 +1,97 @@
+spring.application.name: miya-item-web
+
+server:
+  port: 8086
+  tomcat:
+    uri-encoding: utf-8
+
+#注册服务
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://www.miya.com:8888/eureka
+
+
+
+#请求处理的超时时间
+ribbon.ReadTimeout: 120000
+#请求连接的超时时间
+ribbon.ConnectTimeout: 30000
+
+#调用其他服务
+feign.hystrix.enabled: false
+
+
+
+######## Kafka配置  #########
+#spring.cloud:
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: 120.78.222.191:9092
+#          zk-nodes: 120.78.222.191:2181
+#          minPartitionCount: 1
+#          autoCreateTopics: true
+#          autoAddPartitions: true
+#          autoCommit: false  # TEST
+#      bindings:
+#        input:
+#          destination: item-add-topic
+#          group: miya-group
+#          consumer:
+#            concurrency: 1
+#            partitioned: false
+#            maxAttempts: 1
+#
+#
+#
+#spring.application.index: 0
+#spring.cloud.stream.instanceCount: 1
+#spring.cloud.stream.instanceIndex: 0
+######## Kafka配置  #########
+#
+##生成静态文件的存储路径
+#HTML_OUT_PATH: /Users/Golden/Documents/miya/item_web/
+
+
+#freemarker -- start
+spring:
+  freemarker:
+    template-loader-path: /WEB-INF/ftl/  #设定ftl文件路径
+    cache: false
+    charset: utf-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+#freemarker -- end
+
+
+#jsp -- start
+#spring.mvc.view.prefix: /WEB-INF/jsp/
+#spring.mvc.view.suffix: .jsp
+#jsp -- end
+
+
+#每页显示数量
+ITEMLIST_RESULT_ROWS: 20
+
+
+#详细页面-边栏广告
+AD1_CATEGORY_ID: 95
+AD1_WIDTH: 211
+AD1_HEIGHT: 261
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
