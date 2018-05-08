@@ -1,0 +1,45 @@
+spring.application.name: miya-user-web
+
+server:
+  port: 8092
+  tomcat:
+    uri-encoding: utf-8
+
+
+#向服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://www.miya.com:8888/eureka
+
+#请求处理的超时时间
+ribbon.ReadTimeout: 120000
+#请求连接的超时时间
+ribbon.ConnectTimeout: 30000
+
+
+
+spring:
+    mvc:
+      view:
+        prefix: /WEB-INF/jsp/
+        suffix: .jsp
+
+#feign.hystrix.enabled: false
+
+CART_KEY: MIYA_CART
+TOKEN_KEY: MIYA_TOKEN
+SSO_URL: http://passport.miya.com:8084
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
