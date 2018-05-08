@@ -1,0 +1,72 @@
+
+spring.application.name: miya-order-service
+
+server:
+  port: 8091
+  tomcat:
+    uri-encoding: UTF-8
+
+####### 服务注册中心配置  #########
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://www.miya.com:8888/eureka
+####### 服务注册中心配置  #########
+
+
+
+####### 数据库配置  #########
+spring.datasource:
+  initialize: false # Populate the database using 'data.sql'.
+  name: dataSource # Name of the datasource.
+  type: 'com.zaxxer.hikari.HikariDataSource'
+  driver-class-name: 'com.mysql.jdbc.Driver'
+  url: 'jdbc:mysql://www.miya.com:3306/miyadb?useUnicode=true&characterEncoding=utf-8&useSSL=true'
+  username: root
+  password: root
+####### 数据库配置  #########
+
+
+####### Redis配置  #########
+# Redis数据库索引（默认为0）
+spring.redis:
+  database: 0
+  host: www.miya.com
+  port: 6379
+  password: chen0813
+  pool.max-active: 8
+  pool.max-wait: -1
+  pool.max-idle: 8
+  pool.min-idle: 0
+  timeout: 0
+####### Redis配置  #########
+
+
+
+#### reids Order 缓存 配置   ####
+ORDER_ID_GEN_KEY: ORDER_ID_GEN
+ORDER_ID_BEGIN_VALUE: 100544
+ORDER_ITEM_ID_GEN_KEY: ORDER_ITEM_ID_GEN
+#### reids Order 缓存 配置   ####
+
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
+
+
+
+
+
+
+
+
