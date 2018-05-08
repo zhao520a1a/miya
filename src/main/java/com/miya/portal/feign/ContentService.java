@@ -1,8 +1,7 @@
 package com.miya.portal.feign;
 
+import com.golden.pojo.RespList;
 import com.miya.portal.dto.ContentDto;
-import com.miya.portal.dto.RespList;
-import com.miya.portal.dto.ResponseModal;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "miya-content-service", fallback = ContentServiceHystric.class)
 public interface ContentService {
 
-    @GetMapping(value = "/getContent")
+    @GetMapping(value = "/content/getContent")
     RespList<ContentDto> getContentByCid(@RequestParam("cid") long cid);
 
 }

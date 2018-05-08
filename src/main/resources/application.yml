@@ -1,13 +1,13 @@
 spring.application.name: miya-portal-web
 
 server:
-  port: 8800
+  port: 8082
 
 #向服务中心注册
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://120.78.222.191:8888/eureka
+      defaultZone: http://www.miya.com:8888/eureka
 
 spring:
     mvc:
@@ -16,15 +16,45 @@ spring:
         suffix: .jsp
 
 
+#请求处理的超时时间
+ribbon.ReadTimeout: 120000
+#请求连接的超时时间
+ribbon.ConnectTimeout: 30000
+
+
 
 ##首页大广告位
 #内容分类id
 AD1_CATEGORY_ID: 89
-AD1_WIDTH: 670     #宽屏
-AD1_WIDTH_B: 550   #窄屏
-AD1_HEIGHT: 240
-AD1_HEIGHT_B: 240
+AD1_WIDTH1: 670     #宽屏
+AD1_WIDTH2: 550   #窄屏
+AD1_HEIGHT1: 240
+AD1_HEIGHT2: 240
 
+#中广告
+AD2_CATEGORY_ID: 97
+AD2_WIDTH1: 250
+AD2_WIDTH2: 250
+AD2_HEIGHT1: 180
+AD2_HEIGHT2: 180
+
+#小广告
+AD3_CATEGORY_ID: 90
+AD3_WIDTH1: 310     #宽屏
+AD3_WIDTH2: 210   #窄屏
+AD3_HEIGHT1: 100
+AD3_HEIGHT2: 100
+
+
+#商品轮播图
+AD4_CATEGORY_ID: 96
+
+
+#快报
+AD5_CATEGORY_ID: 91
+
+
+TOKEN_KEY: MIYA_TOKEN
 
 ---
 spring:

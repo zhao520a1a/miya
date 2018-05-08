@@ -1,11 +1,50 @@
 
 
-function login() {
-    return location.href = "http://localhost:8084/user/showLogin";
+function index() {
+    return location.href = "http://www.miya.com:8082/";
 }
+
 function regist() {
-    return location.href = "http://localhost:8084/user/showRegister";
+    return location.href = "http://passport.miya.com:8084/user/showRegister";
 }
+function login() {
+    return location.href = "http://passport.miya.com:8084/user/showLogin";
+}
+function showItem(id) {
+    return location.href = "http://item.miya.com:8086/item/" + id +".html";
+}
+function showProducts(id) {
+    return location.href = "http://item.miya.com:8086/products/" + id +".html";
+}
+
+function addCart(id) {
+    return location.href = "http://cart.miya.com:8088/add/" + id;
+}
+function deleteCart(id) {
+    return location.href = "http://cart.miya.com:8088/delete/" + id;
+}
+function updateCart(id,num) {
+    return location.href = "http://cart.miya.com:8088/update/num/" + id + "/" + num;
+}
+function showCart() {
+    return location.href = "http://cart.miya.com:8088/cart";
+}
+function goToOrder() {
+    return location.href = "http://order.miya.com:8090/order-cart";
+}
+function showMyOrders() {
+    return location.href = "http://order.miya.com:8090/my-orders";
+}
+function showOrderItems(id) {
+    return location.href = "http://order.miya.com:8090/order-items/" + id;
+}
+function showMyInfo(){
+    return location.href = "http://user.miya.com:8092/showMyInfo";
+}
+
+
+
+
 function createCookie(a, b, c, d) {
     var d = d ? d : "/";
     if (c) {
@@ -32,7 +71,7 @@ function addToFavorite() {
 
 //搜索模块
 function search(a) {
-    var b = "http://localhost:8810/search?q=" + encodeURIComponent(document.getElementById(a).value);
+    var b = "http://search.miya.com:8810/search?q=" + encodeURIComponent(document.getElementById(a).value);
     return window.location.href = b;
 }
 window.pageConfig = window.pageConfig || {}, pageConfig.wideVersion = function() {
@@ -49,6 +88,13 @@ window.pageConfig = window.pageConfig || {}, pageConfig.wideVersion = function()
             a = a.replace(new RegExp("\\{" + c + "\\}", "g"), arguments[c + 1]);
     return a
 }, pageConfig.FN_GetDomain = function(a) {
+    // Miya商品访问
+    var u = "http://{0}.miya.com:8086/item/{1}";
+    if(a == 1) {
+        u = this.FN_StringFormat(u, "item", "");
+        return u;
+    }
+
     var b = "http://{0}.jd.com/{1}";
     switch (a) {
         case 1:

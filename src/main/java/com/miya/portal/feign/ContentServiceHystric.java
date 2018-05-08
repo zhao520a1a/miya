@@ -1,12 +1,9 @@
 package com.miya.portal.feign;
 
+import com.golden.pojo.RespList;
 import com.miya.portal.dto.ContentDto;
-import com.miya.portal.dto.RespList;
-import com.miya.portal.dto.ResponseModal;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author 赵金鑫

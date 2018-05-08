@@ -1,4 +1,4 @@
-var TTCart = {
+var MIYACart = {
 	load : function(){ // 加载购物车数据
 		
 	},
@@ -6,8 +6,8 @@ var TTCart = {
 		$(".increment").click(function(){//＋
 			var _thisInput = $(this).siblings("input");
 			_thisInput.val(eval(_thisInput.val()) + 1);
-			$.post("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() + ".action",function(data){
-				TTCart.refreshTotalPrice();
+			$.post("/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val(),function(data){
+				MIYACart.refreshTotalPrice();
 			});
 		});
 		$(".decrement").click(function(){//-
@@ -16,15 +16,15 @@ var TTCart = {
 				return ;
 			}
 			_thisInput.val(eval(_thisInput.val()) - 1);
-			$.post("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() + ".action",function(data){
-				TTCart.refreshTotalPrice();
+			$.post("/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() ,function(data){
+				MIYACart.refreshTotalPrice();
 			});
 		});
 		$(".quantity-form .quantity-text").rnumber(1);//限制只能输入数字
 		$(".quantity-form .quantity-text").change(function(){
 			var _thisInput = $(this);
-			$.post("/service/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val(),function(data){
-				TTCart.refreshTotalPrice();
+			$.post("/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val(),function(data){
+				MIYACart.refreshTotalPrice();
 			});
 		});
 	},
@@ -43,6 +43,6 @@ var TTCart = {
 };
 
 $(function(){
-	TTCart.load();
-	TTCart.itemNumChange();
+	MIYACart.load();
+	MIYACart.itemNumChange();
 });
