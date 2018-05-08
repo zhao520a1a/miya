@@ -1,0 +1,120 @@
+
+spring.application.name: miya-service-zuul
+
+server:
+  port: 8089
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
+#该参数用来开启重试机制
+#spring.cloud.loadbalancer.retry.enabled: true
+
+#spring-cloud-zuul超时配置
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 130000  #断路器的超时时间,断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试。
+ribbon:
+  ReadTimeout: 120000   #请求处理的超时时间
+  ConnectTimeout: 100000   #ribbon请求连接的超时时间
+#  MaxAutoRetries: 0   #对当前实例的重试次数
+#  MaxAutoRetriesNextServer: 1  #对下个实例的重试次数
+#  OkToRetryOnAllOperations: true   #对所有操作请求都进行重试
+#  eureka:
+#    enabled: false
+
+
+##调用其他服务
+#feign.hystrix.enabled: false
+
+eureka:
+    client:
+        serviceUrl:
+           defaultZone: http://www.miya.com:8888/eureka/
+
+
+
+zuul:
+    routes:
+        api-a:
+            path: /users/**
+            serviceId: miya-user-service
+            stripPrefix: false
+        api-b:
+            path: /uses/**
+            serviceId: miya-user-service
+            stripPrefix: false
+        api-c:
+            path: /items/**
+            serviceId: miya-item-service
+            stripPrefix: false
+        api-d:
+            path: /item/**
+            serviceId: miya-item-service
+            stripPrefix: false
+        api-e:
+            path: /itemCats/**
+            serviceId: miya-item-service
+            stripPrefix: false
+        api-f:
+            path: /itemCat/**
+            serviceId: miya-item-service
+            stripPrefix: false
+        api-g:
+            path: /orders/**
+            serviceId: miya-order-service
+            stripPrefix: false
+        api-h:
+            path: /order/**
+            serviceId: miya-order-service
+            stripPrefix: false
+        api-i:
+            path: /admins/**
+            serviceId: miya-user-service
+            stripPrefix: false
+        api-j:
+            path: /admin/**
+            serviceId: miya-user-service
+            stripPrefix: false
+        api-k:
+            path: /download/**
+            serviceId: miya-user-service
+            stripPrefix: false
+        api-l:
+            path: /contents/**
+            serviceId: miya-content-service
+            stripPrefix: false
+        api-m:
+            path: /content/**
+            serviceId: miya-content-service
+            stripPrefix: false
+        api-n:
+            path: /contentCats/**
+            serviceId: miya-content-service
+            stripPrefix: false
+
+
+##这里的配置表示，访问/baidu/** 直接重定向到http://www.baidu.com
+#zuul.routes.baidu.path=/baidu/**
+#zuul.routes.baidu.url=http://www.baidu.com
+#
+##反响代理配置
+##这里的配置类似nginx的反响代理
+##当请求/api/**会直接交给listOfServers配置的服务器处理
+##当stripPrefix=true的时候 （http://127.0.0.1:8181/api/user/list -> http://192.168.1.100:8080/user/list）
+##当stripPrefix=false的时候（http://127.0.0.1:8181/api/user/list -> http://192.168.1.100:8080/api/user/list）
+#zuul.routes.api.path=/api/**
+#zuul.routes.api.stripPrefix=false
+#api.ribbon.listOfServers=192.168.1.100:8080,192.168.1.101:8080,192.168.1.102:8080
+#
+##url重写配置
+##这里的配置，相当于访问/index/** 会直接渲染/home的请求内容(和直接请求/home效果一样), url地址不变
+#zuul.routes.index.path=/index/**
+#zuul.routes.index.url=forward:/home
