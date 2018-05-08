@@ -10,39 +10,12 @@
 		<version>1.0-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
-	<!--<parent>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-starter-parent</artifactId>-->
-		<!--<version>1.5.7.RELEASE</version>-->
-		<!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-	<!--</parent>-->
 
 
-	<artifactId>miya-content</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<artifactId>miya-content-service</artifactId>
 	<packaging>jar</packaging>
-
-	<name>miya-content</name>
 	<description>内容管理服务层</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus</id>
-			<name>Nexus Snapshot</name>
-			<url>http://120.78.222.191:9000/repository/maven-snapshots/</url>
-		</snapshotRepository>
-		<site>
-			<id>nexus</id>
-			<name>Nexus Sites</name>
-			<url>dav:http://120.78.222.191:9000/repository/maven-snapshots/</url>
-		</site>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -51,53 +24,19 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
-		<!--<dependency>-->
-			<!--<groupId>com.springboot.ping</groupId>-->
-			<!--<artifactId>springboot-ping-mybatis-starter</artifactId>-->
-			<!--<version>1.0-SNAPSHOT</version>-->
-		<!--</dependency>-->
-
+		<!--redis：缓存-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--</dependency>-->
 
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-test</artifactId>-->
-			<!--<scope>test</scope>-->
-		<!--</dependency>-->
-
-
-
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.projectlombok</groupId>-->
-			<!--<artifactId>lombok</artifactId>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.alibaba</groupId>-->
-			<!--<artifactId>fastjson</artifactId>-->
-			<!--<version>1.2.13</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.google.guava</groupId>-->
-			<!--<artifactId>guava</artifactId>-->
-			<!--<version>18.0</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>commons-beanutils</groupId>-->
-			<!--<artifactId>commons-beanutils</artifactId>-->
-		<!--</dependency>-->
-		<!--工具包  start -->
 	</dependencies>
 
 	<build>
