@@ -1,0 +1,27 @@
+dao层的类和数据库表的映射对象类必须是以下结构：
+目录结构：
+--dao包    --***Dao类
+--Entity类
+，否则会报以下错误：
+
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
+
+
+Solr7.2的使用：详细教程看笔记
+单机安装Solr服务：
+https://www.cnblogs.com/LUA123/p/7906774.html
+http://blog.csdn.net/AlanQuain/article/details/78903866
+
+IK-Analyzer ： 中文分析器的配置
+blog.csdn.net/cekong_wzj/article/details/78414679
+
+SolrJ的使用：
+http://blog.csdn.net/wyyl1/article/details/53645367
+SpringBoot + solr 的使用：
+http://blog.csdn.net/wohaqiyi/article/details/78260930
+
+Solr查询语法：
+https://www.cnblogs.com/shaosks/p/8042867.html
+
+记录：
+SpringBoot health检查和sorl的core兼容有问题，所以会有警告，不用在意；
