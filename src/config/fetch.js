@@ -8,7 +8,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		let dataStr = ''; //数据拼接字符串
 		Object.keys(data).forEach(key => {
 			dataStr += key + '=' + data[key] + '&';
-		})
+		});
 
 		if (dataStr !== '') {
 			dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
@@ -22,10 +22,10 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
             method: type,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             mode: "cors",
-            cache: "force-cache"
+            // cache: "force-cache"  ////禁止缓存
         };
 
 		if (type == 'POST') {
@@ -35,9 +35,9 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		}
 
 		try {
-			const response = await fetch(url, requestConfig);
+            const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
-			return responseJson
+                return responseJson
 		} catch (error) {
 			throw new Error(error)
 		}

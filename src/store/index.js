@@ -21,7 +21,10 @@ const state = {
 const mutations = {
     saveAdminInfo(state, adminInfo) {
         state.adminInfo = adminInfo;
-        window.localStorage.setItem('adminInfo',adminInfo);
+        var adminInfoStr = JSON.stringify(adminInfo);
+        window.localStorage.setItem('adminInfo',adminInfoStr);
+        // window.sessionStorage.setItem('adminInfo',str);
+        console.log("已将用户信息存入localStorage中"  );
     }
 };
 
@@ -29,12 +32,9 @@ const mutations = {
 const actions = {
 
     async setAdminData({commit}, user_id) {
-        // alert("获得管理员信息getAdminData-username:" + userId);
         try {
             const res = await getAdminInfo({userId:user_id});
             if (res.responseModal.code == '1') {
-                console.log(res.responseModal.msg);
-                alert(JSON.stringify(res.data));
                 commit('saveAdminInfo', res.data);
             } else {
                 throw new Error(res)
@@ -43,10 +43,9 @@ const actions = {
             console.log('您尚未登陆或者session失效')
         }
     },
-    async getAdminData({commit}) {
-        // alert("获得管理员信息getAdminData-username:" + userId);
+    async setUserData({commit}, user) {
         try {
-            return this.store.state.adminInfo;
+                commit('saveAdminInfo', user);
         } catch (err) {
             console.log('您尚未登陆或者session失效')
         }

@@ -11,7 +11,7 @@ arg1-标明依赖的模块  arg2-回调函数:require的文件会被单独打包
 
 
 在build/dev-server.js设置代理服务器ip和port
-在config/index.js设置服务器port和代理路径；
+在config/index.js设置服务器port和代理路径；(注：添加请求要注册代理路径） -- 报错SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
 在src/api/getData.js设置请求url
 在src/config/env.js设置
 

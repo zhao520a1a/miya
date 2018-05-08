@@ -10,198 +10,127 @@ export const login = data => fetch('/admin/login', data, 'POST');
  * 退出
  */
 export const signout = () => fetch('/admin/singout');
-
-
 /**
  * 管理员数量
  */
-export const adminCount = () => fetch('/admin/count');
-/**
- * 获取用户数量
- */
-export const getUserCount = data => fetch('/users/count', data);
-/**
- * 获取商品数量
- */
-export const getItemCount = data => fetch('/items/count', data);
-/**
- * 获取商品类别数量
- */
-export const getItemCatCount = data => fetch('/itemCats/count', data);
-
+export const adminCount = () => fetch('/admin/count', "POST");
 
 /**
  * 管理员列表
  */
 export const adminList = data => fetch('/admin/all', data);
 /**
+ * 获取管理员信息
+ */
+export const getAdminInfo = data => fetch('/admin/info', data);
+/**
+ * 获取用户数量
+ */
+export const getUserCount = data => fetch('/users/count', data);
+/**
  * 获取用户列表
  */
 export const getUserList = data => fetch('/users/list', data);
+
+
+/**
+ * 获取商品数量
+ */
+export const getItemCount = data => fetch('/items/count', data);
 /**
  * 获取商品列表
  */
 export const getItemList = data => fetch('/items/list', data);
 /**
- * 获取商品类别列表
+ * 获取商品描述信息
  */
-export const getItemCatList = data => fetch('/itemCats/list', data);
-
-
-/**
- * 获取管理员信息
- */
-export const getAdminInfo = data => fetch('/admin/info' ,data);
-/**
- * 获取用户信息
- */
-export const getUserInfo = user_id => fetch('/users/info' ,{userId: user_id});
-/**
- * 获取商品信息
- */
-export const getItemInfo = item_id => fetch('/items/info',{itemId: item_id});
+export const getItemDescInfo = data => fetch('/item/descInfo', data);
 /**
  * 获取商品描述信息
  */
-export const getItemDescInfo = itemCat_id => fetch('/items/desc' ,{itemCatId: itemCat_id});
+export const getItemParam = data => fetch('/item/itemParam', data);
 /**
- * 获取商品类别详情
+ * 删除商品
  */
-export const getCatById = category_id => fetch('/itemCats/info/' ,{categoryId: category_id});
-/**
- * 下载本页数据
- */
-export const download = data => '/download/' + data;
-
-/**
- * 获取地址信息
- */
-export const getAddressById = address_id => fetch('/addresse/' + address_id);
-
-
-/**
- * 获取用户分布信息
- */
-export const getUserCity = () => fetch('/user/city/count');
-
-/**
- * 获取定位城市
- */
-
-
-// export const cityGuess = () => fetch('/cities', {
-//     type: 'guess'
-// });
-
-/**
- * 获取搜索地址
- */
-
-
-// export const searchplace = (cityid, value) => fetch('/pois', {
-//     type: 'search',
-//     city_id: cityid,
-//     keyword: value
-// });
-
-
-/**
- * 添加商铺
- */
-
-export const addShop = data => fetch('/shopping/addShop', data, 'POST');
-
-/**
- * 获取当前店铺商品种类
- */
-
-export const getCategory = restaurant_id => fetch('/shopping/getcategory/' + restaurant_id);
-
-
-/**
- * 添加商品种类
- */
-
-export const addCategory = data => fetch('/shopping/addcategory', data, 'POST');
-
-
+export const deleteItem = item_id => fetch('/item/delete/' + item_id, {}, 'DELETE');
 /**
  * 添加商品
  */
+export const addItem = data => fetch('/item/add', data, 'POST');
+/**
+ * 修改商品
+ */
+export const updateItem = data => fetch('/item/update', data, 'POST');
 
-export const addG = data => fetch('/shopping/addfood', data, 'POST');
+/**
+ * 获取商品类别列表
+ */
+export const getItemCatList = data => fetch('/itemCats/list', data);
+/**
+ * 获取商品类别数量
+ */
+export const getItemCatCount = data => fetch('/itemCats/count', data);
+/*
+* 获得特定的商品类别
+*/
+export const getItemCat = data => fetch('/itemCats/info', data);
 
 
 
 /**
- * category 种类列表
+ * 删除图片
  */
+export const deleteAdminPic = data => fetch('/admin/pic/delete/', data);
+export const deleteItemPic = data => fetch('/item/pic/delete/', data);
+export const deleteContentPic = data => fetch('/content/pic/delete/', data);
 
-export const goodsCategory = (latitude, longitude) => fetch('/shopping/v2/restaurant/category');
+export const getItemPicInfo = data => fetch('/item/pic/get/', data);
+export const getContentPicInfo = data => fetch('/content/pic/get/', data);
 
 /**
- * 获取店铺数量
+ * 获取订单数量
  */
 
-export const getStoreCount = () => fetch('/stores/count');
-
+export const getOrderCount = data => fetch('/orders/count', data);
 /**
- * 获取店铺列表
+ * 获取订单列表
  */
-
-export const getStoreList = data => fetch('/stores/list', data);
-
+export const getOrderList = data => fetch('/orders/list', data);
 /**
- * 获取店铺详细信息
+ * 获取内容数量
  */
 
-export const getStoreInfo = restaurant_id => fetch('/stores' + restaurant_id);
-
+export const getContentCount = data => fetch('/contents/count', data);
 /**
- * 更新店铺信息
+ * 获取内容列表
  */
-
-export const updateStore = data => fetch('/shopping/updateshop', data, 'POST');
-
-
+export const getContentList = data => fetch('/contents/list', data);
+/*
+* 获得特定的商品类别
+*/
+export const getContentCat = data => fetch('/contentCats/info', data);
 
 
 /**
- * 删除店铺
+ * 删除内容
  */
+// export const deleteContent = id => fetch('/content/delete/' + id, {}, 'DELETE');
+export const deleteContent = id => fetch('/content/delete/' + id);
+/**
+ * 添加内容
+ */
+export const addContent = data => fetch('/content/add', data, 'POST');
+/**
+ * 修改内容
+ */
+export const updateContent = data => fetch('/content/update', data, 'POST');
 
-export const deleteStore = restaurant_id => fetch('/shopping/restaurant/' + restaurant_id, {}, 'DELETE');
 
 /**
  * 获取menu列表
  */
 
 export const getMenu = data => fetch('/shopping/v2/menu', data);
-
-/**
- * 更新商品信息
- */
-
-export const updateFood = data => fetch('/shopping/v2/updatefood', data, 'POST');
-
-/**
- * 删除商品
- */
-
-export const deleteFood = food_id => fetch('/shopping/v2/food/' + food_id, {}, 'DELETE');
-
-
-/**
- * 获取订单列表
- */
-
-export const getOrderList = data => fetch('/bos/orders', data);
-
-/**
- * 获取订单数量
- */
-
-export const getOrderCount = data => fetch('/bos/orders/count', data);
 
 
 /**

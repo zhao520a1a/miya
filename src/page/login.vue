@@ -16,9 +16,9 @@
 				    	<el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
 				  	</el-form-item>
 				</el-form>
-				<p class="tip">温馨提示：</p>
-				<p class="tip">未登录过的新用户，自动注册</p>
-				<p class="tip">注册过的用户可凭账号密码登录</p>
+				<!--<p class="tip">温馨提示：</p>-->
+				<!--<p class="tip">未登录过的新用户，自动注册</p>-->
+				<!--<p class="tip">注册过的用户可凭账号密码登录</p>-->
 	  		</section>
 	  	</transition>
   	</div>
@@ -56,12 +56,12 @@
 			...mapState(['adminInfo']),
 		},
 		methods: {
-			...mapActions(['getAdminData']),
+			...mapActions(['setAdminData']),
 			async submitForm(formName) {
 				this.$refs[formName].validate(async (valid) => {
 					if (valid) {
-						const res = await login({user_name: this.loginForm.username, password: this.loginForm.password})
-                        if (res.responseModal.code == '1') {
+						const res = await login({username: this.loginForm.username, password: this.loginForm.password})
+                        if (res.responseModal.code == '1') {     //登录成功
 							this.$message({
 		                        type: 'success',
 		                        message: res.responseModal.msg
@@ -71,8 +71,9 @@
 						}else{
 							this.$message({
 		                        type: 'error',
-		                        message: res.responseModal.msg
+		                        message: '请输入正确的用户名密码'
 		                    });
+							console.log(res.responseModal.msg)
 						}
 					} else {
 						this.$notify.error({
@@ -87,7 +88,7 @@
 		},
 		watch: {
 			adminInfo: function (newValue){
-                alert("newValue:" + JSON.stringify(newValue));
+                // alert("Watch_newValue:" + JSON.stringify(newValue));
 				if (newValue.id) {
 					this.$message({
                         type: 'success',
@@ -116,8 +117,10 @@
 		}
 	}
 	.form_contianer{
-		.wh(320px, 210px);
-		.ctp(320px, 210px);
+		//.wh(320px, 210px);
+		//.ctp(320px, 210px);
+        .wh(320px, 170px);
+		.ctp(320px, 170px);
 		padding: 25px;
 		border-radius: 5px;
 		text-align: center;

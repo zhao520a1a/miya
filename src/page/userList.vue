@@ -15,17 +15,17 @@
                 </el-table-column>
                 <el-table-column
                   property="registe_time"
-                  :label="this.tableTitle[0]"
+                  label="注册日期"
                   width="220">
                 </el-table-column>
                 <el-table-column
                   property="username"
-                  :label="this.tableTitle[1]"
+                  label="用户姓名"
                   width="220">
                 </el-table-column>
                 <el-table-column
                     property="phone"
-                    :label="this.tableTitle[2]"
+                    label="手机号"
                 >
                 </el-table-column>
 
@@ -46,7 +46,7 @@
 
 <script>
     import headTop from '../components/headTop'
-    import {download, getUserList, getUserCount} from '@/api/getData'
+    import { getUserList, getUserCount} from '@/api/getData'
     export default {
         data(){
             return {
@@ -89,19 +89,11 @@
             async initData() {
                 try {
                     //获取用户数量
-                    const countData = await getUserCount();
-                    if (typeof countData == 'string') {
-                        data = JSON.parse(data);
-                        alert(data.data);
-                        console.log(data.data);
-                    }
-
-                    // alert(countData.valueOf());
-                    // alert(countData.getResponseModal().valueOf());
-                    if (countData.code == 'OK') {
-                        this.count = countData.data;
+                    const respObject = await getUserCount();
+                    if(respObject.responseModal.code == "1") {
+                        this.count = respObject.data;
                     } else {
-                        throw new Error(countData.msg);
+                        throw new Error(respObject.responseModal.msg);
                     }
                     this.getUsers();
                 } catch (err) {
@@ -115,15 +107,15 @@
             //前端插件自动帮你实现分页的计算
             handleCurrentChange(val) {
                 this.currentPage = val;
-                this.offset = (val - 1) * this.limit;
+                // this.offset = (val - 1) * this.limit;   // offset : 之前的条数
                 this.getUsers()
             },
 
             //用户列表
             async getUsers() {
-                const userData = await getUserList({ offset: this.offset, limit: this.limit });
-
+                const userData = await getUserList({ currPage: this.currentPage, limit: this.limit, count: this.count });
                 const rows = userData.data.page.rows;
+                // alert(rows);
                 this.tableData = [];
                 rows.forEach(item => {
                     const tableData = {};
@@ -131,19 +123,21 @@
                     tableData.registe_time = item.create_time;
                     tableData.phone = item.phone;
                     this.tableData.push(tableData);
-                })
+                });
                 console.log(this.tableData.valueOf());
 
                 const columns = userData.data.columns;
                 this.tableTitle = [];
-                columns.forEach(item => {
+                columns.forEach(item => {n
                     this.tableTitle.push(item);
                 })
             },
 
-            //下载
+            /**
+             * 下载本页数据
+             */
             async perform() {
-                window.open(download("userList"))
+                window.open("/download/userList?limit="+ this.limit + "&currPage=" + this.currentPage + "&count=" + this.count);
             },
 
 

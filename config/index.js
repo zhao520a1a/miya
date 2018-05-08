@@ -30,21 +30,19 @@ module.exports = {
     context: [ //代理路径
         '/download',
         '/admin',
+        '/user',
         '/users',
+        '/item',
         '/items',
+        '/itemCat',
+        '/itemCats',
         '/pic',
-
-        '/ugc',
-        '/v2',
-        '/v3',
-        '/v4',
-        '/bos',
-        '/member',
-        '/promotion',
-        '/eus',
-        '/payapi',
-        '/statis',
-    ],
+        '/orders',
+        '/order',
+        '/content',
+        '/contents',
+        '/contentCats',
+     ],
 
     cssSourceMap: false
   }

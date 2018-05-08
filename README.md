@@ -6,13 +6,7 @@
 
 # 说明
 
->  如果对您对此项目有兴趣，可以点 "Star" 支持一下 谢谢！ ^_^
-
->  或者您可以 "follow" 一下，我会不断开源更多的有趣的项目
-
 >  开发环境 macOS 10.12.4  nodejs 6.10.0
-
->  如有问题请直接在 Issues 中提，或者您发现问题并有非常好的解决方案，欢迎 PR 👍
 
 >  传送门：[前端项目地址](https://github.com/bailicangdu/vue2-elm)  、 [后台系统地址](https://github.com/bailicangdu/node-elm)  、 [原生APP项目地址](https://github.com/bailicangdu/RN-elm)
 
@@ -82,6 +76,3 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 
 
 
-## License
-
-[GPL](https://github.com/bailicangdu/vue2-manage/blob/master/COPYING)

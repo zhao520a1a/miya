@@ -63,10 +63,10 @@
             async initData(){
                 try{
                     const countData = await adminCount();
-                    if (countData.status == 1) {
-                        this.count = countData.count;
-                    }else{
-                        throw new Error('获取数据失败');
+                    if(respObject.responseModal.code == "1") {
+                        this.count = respObject.data;
+                    } else {
+                        throw new Error(respObject.responseModal.msg);
                     }
                     this.getAdmin();
                 }catch(err){
