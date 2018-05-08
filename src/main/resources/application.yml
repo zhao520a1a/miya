@@ -1,0 +1,47 @@
+spring.application.name: miya-search-web
+
+server:
+  port: 8810
+  tomcat.uri-encoding: UTF-8
+
+#向服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://www.miya.com:8888/eureka
+
+#请求处理的超时时间
+ribbon.ReadTimeout: 120000
+#请求连接的超时时间
+ribbon.ConnectTimeout: 30000
+
+
+spring.http.encoding:
+  force: true
+  charset: UTF-8
+  enabled: true
+
+
+spring:
+    mvc:
+      view:
+        prefix: /WEB-INF/jsp/
+        suffix: .jsp
+
+#feign.hystrix.enabled: false
+
+#每页显示数量
+SEARCH_RESULT_ROWS: 12
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
