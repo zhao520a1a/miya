@@ -1,7 +1,7 @@
 package com.miya.service;
 
 
-import com.miya.dto.RespObject;
+import com.golden.pojo.RespObject;
 import com.miya.entity.ItemParam;
 
 public interface ItemParamService {

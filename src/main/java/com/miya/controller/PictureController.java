@@ -1,125 +1,142 @@
 package com.miya.controller;
 
-import com.miya.dto.RespObject;
-import com.miya.dto.ResponseModal;
-import com.miya.entity.User;
-import com.miya.service.impl.UserServiceImpl;
-import com.miya.utils.FastDFSClient;
-import com.miya.utils.StringUtil;
+import com.golden.pojo.RespObject;
+import com.golden.pojo.ResponseModal;
+import com.golden.util.FastDFSClient;
+import com.golden.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.csource.common.NameValuePair;
+import org.csource.fastdfs.ClientGlobal;
+import org.csource.fastdfs.FileInfo;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Properties;
 
 /**
  * 图片上传controller
  *
- * @author 赵金鑫
  */
 @Slf4j
 @RestController
-@RequestMapping("/pic")
+@RequestMapping("item/pic")
 public class PictureController {
 
     @Value("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;
 
-    @Autowired
-    UserServiceImpl userService;
+    private static Properties props;
+
+    private FastDFSClient fastDFSClient = new FastDFSClient(props);
+
+     static {
+        props = new Properties();
+        props.setProperty(ClientGlobal.PROP_KEY_TRACKER_SERVERS, "120.78.222.191:22122");
+        props.setProperty(ClientGlobal.PROP_KEY_CONNECT_TIMEOUT_IN_SECONDS, "2");
+        props.setProperty(ClientGlobal.PROP_KEY_NETWORK_TIMEOUT_IN_SECONDS, "30");
+        props.setProperty(ClientGlobal.PROP_KEY_CHARSET, "UTF-8");
+        props.setProperty(ClientGlobal.PROP_KEY_HTTP_ANTI_STEAL_TOKEN, "no");
+        props.setProperty(ClientGlobal.PROP_KEY_HTTP_SECRET_KEY, "FastDFS1234567890");
+        props.setProperty(ClientGlobal.PROP_KEY_HTTP_TRACKER_HTTP_PORT, "80");
+    }
+
+    public PictureController() throws Exception {
+    }
+
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseModal handleFileUpload(@RequestPart(value = "file") MultipartFile uploadFile) {
+    RespObject<String>  handleFileUpload(@RequestPart(value = "file") MultipartFile uploadFile) {
         log.info("OriginalFilename{}", uploadFile.getOriginalFilename());
-        ResponseModal resp = new ResponseModal();
+        String url = "";
         try {
-            System.out.println("-------");
             //接收上传的文件 ＋ 取扩展名
             String originalFilename = uploadFile.getOriginalFilename();
             String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             //上传到图片服务器
-            FastDFSClient fastDFSClient = new FastDFSClient("classpath:fdfs_client.conf");
-            String url = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
+//            FastDFSClient fastDFSClient = new FastDFSClient("classpath:fdfs_client.conf");  -- 当打包运行时有问题，文件中的信息无法读取
+//            删除图片异常：{}org.csource.common.MyException: configure item fastdfs.tracker_servers is required
+              fastDFSClient = new FastDFSClient(props);
+            url = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
             url = IMAGE_SERVER_URL + url;
             log.info("上传图片的URL:{}", url);
-            resp = ResponseModal.successMsg(url);
-
-            User user = new User();
-            user.setAvatar(url);
-            userService.update(user);
-
-
         } catch (Exception e) {
             e.printStackTrace();
             log.error("上传图片异常：{}" + StringUtil.getTrace(e));
-            resp = ResponseModal.failMsg("图片上传失败");
+            return new RespObject<>(ResponseModal.errorMsg("图片上传失败"), "");
         }
-        return resp;
+        return new RespObject<>(ResponseModal.successMsg("图片上传成功"), url);
+    }
 
+    @RequestMapping(value = "/delete")
+    ResponseModal handleRemove(@RequestParam(value = "fileId") String fileId) {
+        try {
+            if(!StringUtil.isEmpty(fileId)) {
+//                http://120.78.222.191/  group1/M00/00/00/wKgBMFrN-GqAVWdxAAAGZNxGB6k602.png
+                fileId = fileId.substring(22, fileId.length());
+                log.info("删除图片的fileId:{}", fileId);
+                //上传到图片服务器
+                fastDFSClient = new FastDFSClient(props);
+                if(fastDFSClient.deleteFile(fileId) == 0 ) {
+                    return  ResponseModal.successMsg("图片删除成功") ;
+                } else{
+                    return  ResponseModal.failMsg("图片删除失败") ;
+                }
+            }
+            return  ResponseModal.successMsg("图片删除成功") ;
+        } catch (Exception e) {
+            log.error("删除图片异常：{}" + StringUtil.getTrace(e));
+            return ResponseModal.errorMsg("图片删除失败") ;
+        }
     }
 
 
-    //    @RequestMapping("/upload")
-//    public RespObject<String> picUpload1(@RequestParam String id, @RequestBody MultipartFile uploadFile) {
-//        log.info("id:{} file:{}",id,uploadFile);
-//        try {
-//            //接收上传文件 + 取扩展名
-//            String originalFilename = uploadFile.getOriginalFilename();
-//            String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-//
-//            //上传到服务器上
-//            FastDFSClient fastDFSClient = new FastDFSClient("classpath:resource/fdfs_client.conf");
-//            String url = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
-//            url = IMAGE_SERVER_URL + url;
-//            return new RespObject<String> (ResponseModal.successMsg("图片上传成功"),url);
-//        } catch (Exception e) {
-//            log.info("{}", StringUtil.getTrace(e));
-//            return new RespObject<String> (ResponseModal.errorMsg("图片上传失败"),"");
-//        }
-//    }
-    @RequestMapping("/upload1")
-    public RespObject<String> picUpload1() {
-        String filePath = "D:\\Download\\1.jpg";
-        log.info("开始Upload1---{}", filePath);
+    @RequestMapping(value = "/get" )
+    RespObject<FileInfo> getFileInfo(@RequestParam(value = "fileId") String fileId) {
+        FileInfo fileInfo = null;
         try {
-            //接收上传文件 + 取扩展名
-//            String originalFilename = uploadFile.getOriginalFilename();
-//            String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-
-            //上传到服务器上
-            FastDFSClient fastDFSClient = new FastDFSClient("classpath:fdfs_client.conf");
-            String url = fastDFSClient.uploadFile(filePath, "jpg");
-            url = IMAGE_SERVER_URL + url;
-            log.info("URL:{}", url);
-            System.out.println(url);
-            return new RespObject<String>(ResponseModal.successMsg("图片上传成功"), url);
+            if(!StringUtil.isEmpty(fileId)) {
+                fileId = fileId.substring(22, fileId.length());
+                log.info("图片的fileId:{}", fileId);
+                //上传到图片服务器
+                fastDFSClient = new FastDFSClient(props);
+                fileInfo = fastDFSClient.getFileInfo(fileId);
+//          查找文件的名字属性----报错：  java.lang.NullPointerException
+//            NameValuePair nvps [] = fastDFSClient.getFileMate(fileId);
+//            for(NameValuePair nvp : nvps){
+//                System.out.println(nvp.getName() + ":" + nvp.getValue());
+//            }
+            }
         } catch (Exception e) {
-            log.info("{}", StringUtil.getTrace(e));
-            return new RespObject<String>(ResponseModal.errorMsg("图片上传失败"), "");
+            e.printStackTrace();
+            log.error("获取图片异常：{}" + StringUtil.getTrace(e));
+            return new RespObject<>(ResponseModal.errorMsg("图片上传失败"), null);
         }
+        return new RespObject<>(ResponseModal.successMsg("图片上传成功"), fileInfo);
     }
 
 
     @Test
     public void test() {
-        //上传到服务器上
+
+
         FastDFSClient fastDFSClient = null;
-        String filePath = "D:\\Download\\1.jpg";
-        String configPath = "D:\\OwnProjects\\miya\\miya-manage\\src\\main\\resources\\fdfs_client.conf";
+        String filePath = "/Users/Golden/Downloads/1.jpg";
+        String configPath = "/Users/Golden/Documents/OwnProjects/miya_code/miya-service/miya-content-service/src/main/resources/fdfs_client.conf";
         try {
             fastDFSClient = new FastDFSClient(configPath);
 
+            //上传
             String url = fastDFSClient.uploadFile(filePath, "jpg");
             url = IMAGE_SERVER_URL + url;
-
             System.out.println(url);
+            //下载
+//           int i = fastDFSClient.deleteFile("group1/M00/00/00/wKgBMFrN_K2AFClBAAA0dbLBau8170.png");
+//            System.out.println(i);
         } catch (Exception e) {
             e.printStackTrace();
         }

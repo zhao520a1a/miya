@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
 	<Properties>
-		<Property name="logPath">../logs/miya-manage</Property>
-		<Property name="filename">miya-manage</Property>
+		<Property name="logPath">../logs/item-module</Property>
+		<Property name="filename">service-item</Property>
 	</Properties>
 
 	<Appenders>
@@ -27,8 +27,5 @@
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Root>
-		<!--<Logger name="com.yirendai.jfsk.rsc.dao2.NdbDao" level="TRACE" additivity="false">-->
-			<!--<AppenderRef ref="Console"/>-->
-		<!--</Logger>-->
 	</Loggers>
 </Configuration>
