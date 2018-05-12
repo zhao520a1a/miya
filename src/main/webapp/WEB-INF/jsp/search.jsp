@@ -87,7 +87,7 @@
                         </a>
                     </div>
                     <div class="p-name">
-                        <a target="_blank" href="javascript:showItem(${item.id})">
+                        <a href="javascript:showItem(${item.id})">
                                 ${item.title}
                         </a>
                     </div>
