@@ -64,7 +64,7 @@ vue2 + vuex + vue-router + webpack + ES6/7 + less + element-ui
 ## 部分截图
 
 
-<img src="https://github.com/bailicangdu/vue2-manage/blob/master/screenshots/manage_home.png"/>
+<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"/>
 
 <img src="https://github.com/bailicangdu/vue2-manage/blob/master/screenshots/manage_shop.png"/>
 
