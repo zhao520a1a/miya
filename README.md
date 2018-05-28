@@ -101,10 +101,10 @@ manage.miya.com
 <img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E6%90%9C%E7%B4%A2/%E6%90%9C%E7%B4%A2.png?raw=true"/>
 
 #### 商品列表
-<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7/%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF.png?raw=true"/>
+<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E5%95%86%E5%93%81/%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8.png?raw=true"/>
 
 #### 商品详情
-<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E8%B4%AD%E7%89%A9%E8%BD%A6/%E8%B4%AD%E7%89%A9%E8%BD%A6.png?raw=true"/>
+<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E5%95%86%E5%93%81/%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85.png?raw=true"/>
 
 #### 购物车
 <img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E8%B4%AD%E7%89%A9%E8%BD%A6/%E8%B4%AD%E7%89%A9%E8%BD%A6.png?raw=true"/>
