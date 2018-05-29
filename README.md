@@ -27,18 +27,18 @@ git clone  
 
 ```
 # 技术栈
-####微服务架构
+#### 微服务架构
 系统采用微服务架构进行设计的,微服务架构也指一种松耦合的、有一定的有界上下文的面向服务架构。它是当下最新的热门话题之一。简而言之,微服务架构(Microservice Architecture)是一种架构概念,旨在通过将功能分解到各个离散的服务中以实现对解决方案的解耦。每个服务为独立的业务开发,一个微服务一般完成某个特定的功能,通过一些轻量级的通信机制进行通信,一系列独立运行的微服务共同构建起了整个系统。这使系统结构变化和维护更加容易,增加代码的可复用性。
-####所用技术
->  后台技术：SpringCloude(Eureka、Zuul、Feign、Hystrix、Spring Boot) MyBatis   前台技术：Vue、Jsp、Freemark
->  Solr(搜索)
->  Kafka(消息传递)
->  Redis(缓存服务器)
->  FastDFS(文件存储)
->  Mysql(数据存储)
->  Tomcat(web服务器)
->  Git(代码管理)
->  Nexus(jar包管理)
+#### 所用技术
+-  后台技术：SpringCloude(Eureka、Zuul、Feign、Hystrix、Spring Boot) MyBatis   前台技术：Vue、Jsp、Freemark
+-  Solr(搜索)
+-  Kafka(消息传递)
+-  Redis(缓存服务器)
+-  FastDFS(文件存储)
+-  Mysql(数据存储)
+-  Tomcat(web服务器)
+-  Git(代码管理)
+-  Nexus(jar包管理)
 
 八大功能模块分别是：门户模块、单点登录模块、搜索模块、用户模块、商品模块、购物车模块、订单模块、后台管理模块
 16个项目  15个jar包 
