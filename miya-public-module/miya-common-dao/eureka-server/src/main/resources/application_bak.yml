@@ -1,0 +1,50 @@
+
+eureka:
+  client:
+    registerWithEureka: false #通过置为false来表明自己是一个eureka server.
+    fetch-registry: false #通过置为false来表明自己是一个eureka server.
+  instance:
+    prefer-ip-address: true  #让eureka-server，可以通过ip让其他服务注册它
+
+
+#启动一台
+spring:
+  profiles:
+    active: peer1
+#启动另一台
+#spring:
+#  profiles:
+#    active: peer2
+
+---
+spring.profiles: peer1
+server:
+  port: 8888
+
+#高可用配置 --start
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    status-page-url: ${management.context-path}/info  #Eureka的状态页
+    health-check-url: ${management.context-path}/health   #Eureka的健康指示器
+  client:
+    serviceUrl:
+#      defaultZone: http://127.0.0.1:8889/eureka/   #高可用方案，向对方请求：两台对等EurekaServer
+      defaultZone: http://127.0.0.1:8888/eureka/
+management:
+  context-path: /golden  #自己
+
+
+#---
+##高可用的服务注册中心:2个服务中心，相互感应，当有服务注册时，两个Eureka-eserver是对等的，它们都存有相同的信息，这就是通过服务器的冗余来增加可靠性，
+##分别启动测试 peer1,peer2
+#spring.profiles: peer2
+#server:
+#  port: 8889
+#eureka:
+#  instance:
+#    hostname: 127.0.0.1
+#  client:
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:8888/eureka/  #向对方请求
+#高可用配置 --end

@@ -1,0 +1,36 @@
+spring.application.name: eureka-server
+
+server:
+  port: 8888
+
+
+eureka:
+  client:
+    #禁用它的客户端注册行为(禁止将自己作为客户端来尝试注册它自己)
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    prefer-ip-address: true  #让eureka-server，可以通过ip让其他服务注册它
+    status-page-url: ${management.context-path}/info  #Eureka的状态页
+    health-check-url: ${management.context-path}/health   #Eureka的健康指示器
+
+management:
+  context-path: /miya
+
+
+---
+spring:
+  profiles: envProd
+
+---
+spring:
+  profiles: envTest
+
+---
+spring:
+  profiles: envDev
+
+
+
+
+
