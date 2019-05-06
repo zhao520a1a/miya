@@ -48,7 +48,7 @@ git clone  
 八大功能模块分别是：门户模块、单点登录模块、搜索模块、用户模块、商品模块、购物车模块、订单模块、后台管理模块
 16个项目  15个jar包 
 
-<img src="https://github.com/zhao520a1a/miya/blob/master/miya-parent/src/main/screenshot/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"/>
+<img src="https://github.com/zhao520a1a/miya/blob/master/miya-public-module/miya-parent/src/main/screenshot/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"/>
 
  
 
